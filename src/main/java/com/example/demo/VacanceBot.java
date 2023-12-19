@@ -16,7 +16,7 @@ public class VacanceBot extends TelegramLongPollingBot {
 
 
     public VacanceBot() {
-        super("6957902060:AAGh5-yov6y_cx7nTUWExq_y1Rc6Mt79iuQ");
+        super("some token");
     }
 
     @Override
