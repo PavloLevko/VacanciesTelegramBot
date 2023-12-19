@@ -52,8 +52,26 @@ public class VacanceBot extends TelegramLongPollingBot {
     private void showVacancyDescription(String id, Update update) throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
-        sendMessage.setText("Vacancy description for vacancy with id = " + id);
+       VacancyDto vacancyDto = vacancyService.get(id);
+        String description = vacancyDto.getShortDescription() ;
+        sendMessage.setText(description);
+        sendMessage.setReplyMarkup(getBackToVacanciesMenu());
         execute(sendMessage);
+    }
+
+    private ReplyKeyboard getBackToVacanciesMenu() {
+        List<InlineKeyboardButton> row = new ArrayList<>();
+        InlineKeyboardButton backToVacanciesButton = new InlineKeyboardButton();
+        backToVacanciesButton.setText("Back to vacancies");
+        backToVacanciesButton.setCallbackData("backToVacancies");
+        row.add(backToVacanciesButton);
+
+        InlineKeyboardButton backToStartMenuButton = new InlineKeyboardButton();
+        backToStartMenuButton.setText("Back to Menu");
+        backToStartMenuButton.setCallbackData("backToStartMenu");
+        row.add(backToStartMenuButton);
+
+        return new InlineKeyboardMarkup(List.of(row));
     }
 
     private void handleStartCommand(Update update) {

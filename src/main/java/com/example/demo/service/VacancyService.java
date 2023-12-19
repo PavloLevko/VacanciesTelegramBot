@@ -38,4 +38,8 @@ public class VacancyService {
         return vacancyDtoMap.values().stream().
                 filter( v -> v.getTitle().toLowerCase().contains("junior")).toList();
     }
+
+    public VacancyDto get(String id) {
+        return vacancyDtoMap.get(id);
+    }
 }
