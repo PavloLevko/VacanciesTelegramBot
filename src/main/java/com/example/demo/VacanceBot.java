@@ -41,9 +41,6 @@ public class VacanceBot extends TelegramLongPollingBot {
         }catch (Exception e){
             throw new RuntimeException("Can't send message to user!", e);
         }
-
-
-
     }
 
     private void showVacancyDescription(String id, Update update) throws TelegramApiException {
